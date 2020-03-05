@@ -126,8 +126,3 @@ class CategoryController extends BaseController
         }
     }
 }
-
-class Test
-{
-    #code
-}
