@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
                 'password' => password_hash(Str::random(16), PASSWORD_BCRYPT),
             ],
             [
-                'name' => 'Автор не известен',
+                'name' => 'Автор известен',
                 'email' => 'author@g.g',
                 'password' => password_hash('123123', PASSWORD_BCRYPT),
             ],

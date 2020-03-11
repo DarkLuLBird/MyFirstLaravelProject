@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BlogArticle extends Model
 {
     use SoftDeletes;
+
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

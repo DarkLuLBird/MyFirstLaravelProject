@@ -12,20 +12,22 @@ use Illuminate\Support\Str;
 class CategoryController extends BaseController
 {   
     /**
+     * @var BlogCategoryRepository
+     */    
+    private $blogCategoryRepository;
+    
+    public function __construct()
+    {
+        parent::__construct();
+        
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    private $blogCategoryRepository;
-
-    public function __construct()
-    {
-        parent::__construct();
-     
-        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
-    }
-
     public function index()
     {
         $categories = $this->blogCategoryRepository->getAll();
