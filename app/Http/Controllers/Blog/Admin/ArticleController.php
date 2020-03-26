@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog\Admin;
 
 use App\Models\BlogArticle;
 use App\Repositories\BlogArticleRepository;
+use App\Repositories\BlogCategoryRepository;
 use Illuminate\Http\Request;
 
 class ArticleController extends BaseController
@@ -12,12 +13,18 @@ class ArticleController extends BaseController
      * @var BlogArticleRepository
      */
     private $blogArticleRepository;
+
+    /**
+     * @var BlogCategoryRepository
+     */
+    private $blogCategoryRepository;
     
     public function __construct()
     {
         parent::__construct();
      
         $this->blogArticleRepository = app(BlogArticleRepository::class);
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
     }
     /**
      * Display a listing of the resource.
@@ -60,7 +67,16 @@ class ArticleController extends BaseController
      */
     public function edit($id)
     {
-        dd(__METHOD__, $id);
+        $article = $this->blogArticleRepository->getEdit($id);
+        if(empty($article)){
+            abort(404);
+        }
+
+        $categoryList = $this->blogCategoryRepository->getForSelect();
+
+        return view('blog.admin.articles.edit', compact('article', 'categoryList'));
+
+        // dd(__METHOD__, $id);
     }
 
     /**
